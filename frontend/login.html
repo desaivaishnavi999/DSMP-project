@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - CSE IntelliLearn</title>
+
+    <link rel="stylesheet" href="css/login.css">
+
+</head>
+
+<body>
+
+    <!-- LOGIN CONTAINER -->
+
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <div class="login-header">
+
+                <h1>
+                    CSE IntelliLearn
+                </h1>
+
+                <p>
+                    Smart Learning & Academic Support
+                </p>
+
+            </div>
+
+
+            <h2>
+                Welcome Back
+            </h2>
+
+            <p class="login-text">
+                Login to continue your learning journey.
+            </p>
+
+
+            <!-- LOGIN FORM -->
+
+            <form>
+
+                <label for="username">
+                    Email / Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter your email or username"
+                    required
+                >
+
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+
+                <label for="role">
+                    Select Role
+                </label>
+
+                <select id="role" required>
+
+                    <option value="">
+                        Select Role
+                    </option>
+
+                    <option value="student">
+                        Student
+                    </option>
+
+                    <option value="teacher">
+                        Teacher
+                    </option>
+
+                </select>
+
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+
+            <!-- BACK TO HOME -->
+
+            <a href="index.html" class="back">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOGIN JAVASCRIPT -->
+
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,345 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            #e3efff,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f1f6fd,
+            #eaf2fc
+        );
+
+    color: #263b58;
+
+    min-height: 100vh;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    height: 70px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #d7e2ef;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 55px;
+
+    box-shadow:
+        0 3px 12px rgba(52, 82, 120, 0.08);
+}
+
+.logo {
+    font-size: 24px;
+
+    font-weight: bold;
+
+    color: #405f91;
+}
+
+.student-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    font-size: 14px;
+}
+
+.student-info span {
+    color: #526b89;
+}
+
+.student-info a {
+    color: #405f91;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+.student-info a:hover {
+    color: #2f4f7d;
+
+    text-decoration: underline;
+}
+
+
+/* ================= MAIN ================= */
+
+main {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 55px 30px;
+}
+
+
+/* ================= WELCOME ================= */
+
+.welcome {
+    text-align: center;
+
+    margin-bottom: 55px;
+}
+
+.small-title {
+    color: #607fa8;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 15px;
+}
+
+.welcome h1 {
+    color: #365b91;
+
+    font-size: 36px;
+
+    margin-bottom: 15px;
+}
+
+.welcome p:last-child {
+    color: #71839b;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* ================= SECTIONS ================= */
+
+.academic-section,
+.activity-section {
+    margin-bottom: 55px;
+}
+
+.academic-section h2,
+.activity-section h2 {
+    color: #405f91;
+
+    font-size: 25px;
+
+    margin-bottom: 25px;
+
+    border-left: 4px solid #6d8eb8;
+
+    padding-left: 12px;
+}
+
+
+/* ================= GRID ================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* ================= CARD ================= */
+
+.dashboard-card {
+    background: #ffffff;
+
+    border: 1px solid #d6e2ef;
+
+    border-radius: 10px;
+
+    padding: 30px 25px;
+
+    min-height: 270px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    box-shadow:
+        0 8px 25px rgba(52, 82, 120, 0.09);
+
+    transition: 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 30px rgba(52, 82, 120, 0.14);
+
+    border-color: #b9cce3;
+}
+
+
+/* ================= ICON ================= */
+
+.icon {
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #edf4fc;
+
+    border: 1px solid #d3e1f0;
+
+    border-radius: 8px;
+
+    font-size: 23px;
+
+    margin-bottom: 20px;
+}
+
+
+/* ================= CARD TEXT ================= */
+
+.dashboard-card h3 {
+    color: #405f91;
+
+    font-size: 20px;
+
+    margin-bottom: 12px;
+}
+
+.dashboard-card p {
+    color: #71839b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin-bottom: 22px;
+
+    flex-grow: 1;
+}
+
+
+/* ================= BUTTON ================= */
+
+.dashboard-card button {
+    padding: 10px 18px;
+
+    background: #4f6f9f;
+
+    color: #ffffff;
+
+    border: none;
+
+    border-radius: 6px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.dashboard-card button:hover {
+    background: #365a8a;
+
+    transform: translateY(-2px);
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    text-align: center;
+
+    padding: 25px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #d7e2ef;
+
+    color: #71839b;
+
+    font-size: 13px;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 850px) {
+
+    header {
+        padding: 0 25px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .welcome h1 {
+        font-size: 30px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    header {
+        height: auto;
+
+        padding: 18px 20px;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .student-info {
+        gap: 15px;
+    }
+
+    main {
+        padding: 40px 20px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome h1 {
+        font-size: 26px;
+    }
+
+    .welcome p:last-child {
+        font-size: 14px;
+    }
+}
