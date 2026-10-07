@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CSE IntelliLearn - Doubts</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f9ff;
+            color: #1e293b;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2563eb, #0d9488);
+            color: white;
+            padding: 18px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 25px;
+        }
+
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            color: #1d4ed8;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .doubt-form {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.08);
+
+            margin-bottom: 30px;
+        }
+
+        .doubt-form h3 {
+            color: #1d4ed8;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        select,
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+
+            font-size: 15px;
+            outline: none;
+        }
+
+        select:focus,
+        input:focus,
+        textarea:focus {
+            border-color: #2563eb;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+
+            border: none;
+
+            padding: 12px 22px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+            font-size: 15px;
+
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .message {
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 12px;
+
+            background: #dcfce7;
+            color: #166534;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .doubt-list {
+            display: grid;
+            gap: 18px;
+        }
+
+        .doubt-card {
+            background: white;
+            padding: 22px;
+
+            border-radius: 12px;
+
+            border-left: 5px solid #2563eb;
+
+            box-shadow:
+                0 3px 12px rgba(0, 0, 0, 0.07);
+        }
+
+        .doubt-card h3 {
+            color: #1d4ed8;
+            margin-bottom: 8px;
+        }
+
+        .doubt-card p {
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .waiting {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .answered {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .answer {
+            margin-top: 12px;
+
+            padding: 12px;
+
+            background: #eff6ff;
+
+            border-radius: 8px;
+
+            color: #334155;
+        }
+
+        @media(max-width: 700px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>CSE IntelliLearn</h1>
+
+        <a href="student-dashboard.html"
+           class="back-btn">
+
+            ← Dashboard
+
+        </a>
+
+    </header>
+
+
+
+    <div class="container">
+
+
+        <h2 class="page-title">
+            Ask Your Doubt
+        </h2>
+
+        <p class="subtitle">
+            Ask questions related to your CSE subjects.
+        </p>
+
+
+
+        <!-- DOUBT FORM -->
+
+        <div class="doubt-form">
+
+            <h3>
+                Submit New Doubt
+            </h3>
+
+
+            <form id="doubtForm">
+
+
+                <div class="form-group">
+
+                    <label for="subject">
+                        Subject
+                    </label>
+
+                    <select id="subject" required>
+
+                        <option value="">
+                            Select Subject
+                        </option>
+
+                        <option>
+                            Data Structure Using C
+                        </option>
+
+                        <option>
+                            Computer Network
+                        </option>
+
+                        <option>
+                            Discrete Mathematical Structure
+                        </option>
+
+                        <option>
+                            Automata Theory
+                        </option>
+
+                        <option>
+                            Operating System
+                        </option>
+
+                        <option>
+                            CPP-OOP
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Doubt Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Enter your doubt title"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="question">
+                        Your Question
+                    </label>
+
+                    <textarea
+                        id="question"
+                        placeholder="Explain your doubt..."
+                        required></textarea>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="btn">
+
+                    Submit Doubt
+
+                </button>
+
+
+                <div
+                    id="message"
+                    class="message">
+
+                    Your doubt has been submitted successfully!
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+
+        <!-- PREVIOUS DOUBTS -->
+
+        <h3 class="page-title">
+            My Previous Doubts
+        </h3>
+
+
+        <div class="doubt-list">
+
+
+            <div class="doubt-card">
+
+                <h3>
+                    Difference between Stack and Queue
+                </h3>
+
+                <p>
+                    <strong>Subject:</strong>
+                    Data Structure Using C
+                </p>
+
+                <p>
+                    What is the main difference between
+                    stack and queue?
+                </p>
+
+                <span class="status answered">
+                    Answered
+                </span>
+
+
+                <div class="answer">
+
+                    <strong>Teacher Answer:</strong>
+
+                    Stack follows LIFO, while Queue
+                    follows FIFO.
+
+                </div>
+
+            </div>
+
+
+
+            <div class="doubt-card">
+
+                <h3>
+                    OS Process Scheduling
+                </h3>
+
+                <p>
+                    <strong>Subject:</strong>
+                    Operating System
+                </p>
+
+                <p>
+                    Explain the basic concept of
+                    process scheduling.
+                </p>
+
+                <span class="status waiting">
+                    Waiting for Answer
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+        const doubtForm =
+            document.getElementById(
+                "doubtForm"
+            );
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        doubtForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                message.style.display =
+                    "block";
+
+
+                doubtForm.reset();
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSE IntelliLearn - Submit Assignment</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f7fb;
+            font-family: Arial, sans-serif;
+            color: #1f2937;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4F46E5, #0D9488);
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .header p {
+            margin-top: 8px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px 40px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #4F46E5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .assignment-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .assignment-box h2 {
+            margin-top: 0;
+            color: #111827;
+        }
+
+        .description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .info {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 220px;
+            padding: 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            resize: vertical;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #4F46E5;
+        }
+
+        .submit-btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 9px;
+            background: #4F46E5;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #4338CA;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="header-content">
+
+        <h1>CSE IntelliLearn</h1>
+
+        <p>Submit Assignment</p>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+    <a href="assignments.html" class="back-btn">
+        ← Back to Assignments
+    </a>
+
+
+    <div class="assignment-box">
+
+        <h2 id="assignmentTitle">
+            Loading Assignment...
+        </h2>
+
+
+        <p id="assignmentDescription"
+           class="description">
+        </p>
+
+
+        <div class="info">
+
+            <strong>Due Date:</strong>
+
+            <span id="dueDate">
+                Loading...
+            </span>
+
+        </div>
+
+
+        <form id="submissionForm">
+
+            <label for="answer">
+                Your Answer
+            </label>
+
+
+            <textarea
+                id="answer"
+                placeholder="Write your assignment answer here..."
+                required>
+            </textarea>
+
+
+            <button
+                type="submit"
+                class="submit-btn">
+
+                Submit Assignment
+
+            </button>
+
+        </form>
+
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+
+<script>
+
+
+// Get assignment ID from URL
+
+const params =
+    new URLSearchParams(window.location.search);
+
+const assignmentId =
+    params.get("assignment_id");
+
+
+// Temporary student ID
+
+const studentId = 1;
+
+
+const title =
+    document.getElementById("assignmentTitle");
+
+const description =
+    document.getElementById("assignmentDescription");
+
+const dueDate =
+    document.getElementById("dueDate");
+
+const form =
+    document.getElementById("submissionForm");
+
+const message =
+    document.getElementById("message");
+
+
+
+// Load assignment
+
+if (!assignmentId) {
+
+    title.innerText =
+        "Assignment not selected.";
+
+    form.style.display =
+        "none";
+
+}
+else {
+
+
+    fetch(
+        "http://localhost:3000/assignments"
+    )
+
+    .then(response =>
+        response.json()
+    )
+
+    .then(assignments => {
+
+
+        const assignment =
+            assignments.find(
+                item =>
+                item.assignment_id ==
+                assignmentId
+            );
+
+
+        if (!assignment) {
+
+            title.innerText =
+                "Assignment not found.";
+
+            form.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        title.innerText =
+            assignment.title;
+
+
+        description.innerText =
+            assignment.description ||
+            "No description provided.";
+
+
+        dueDate.innerText =
+            assignment.due_date ||
+            "No due date";
+
+
+    })
+
+    .catch(error => {
+
+        console.log(error);
+
+        title.innerText =
+            "Unable to load assignment.";
+
+    });
+
+}
+
+
+
+// Submit assignment
+
+form.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const answer =
+            document.getElementById(
+                "answer"
+            ).value.trim();
+
+
+        if (!answer) {
+
+            showMessage(
+                "Please write your answer first.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const data = {
+
+            assignment_id:
+                Number(assignmentId),
+
+            student_id:
+                studentId,
+
+            answer_text:
+                answer
+
+        };
+
+
+        fetch(
+            "http://localhost:3000/submissions",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(data)
+
+            }
+        )
+
+        .then(response =>
+            response.json()
+        )
+
+        .then(result => {
+
+
+            if (result.error) {
+
+                showMessage(
+                    result.error,
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            showMessage(
+                "Assignment submitted successfully!",
+                "success"
+            );
+
+
+            document.getElementById(
+                "answer"
+            ).value = "";
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "assignments.html";
+
+                },
+                1500
+            );
+
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+            showMessage(
+                "Unable to submit assignment.",
+                "error"
+            );
+
+        });
+
+    }
+);
+
+
+
+// Message function
+
+function showMessage(
+    text,
+    type
+) {
+
+    message.innerText =
+        text;
+
+    message.className =
+        "message " + type;
+
+    message.style.display =
+        "block";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

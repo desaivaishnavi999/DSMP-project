@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Subjects - Teacher | CSE IntelliLearn</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8ff;
+            color: #1e293b;
+        }
+
+        /* Header */
+        header {
+            background: #4f7cff;
+            color: white;
+            padding: 18px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 25px;
+        }
+
+        .back-btn {
+            background: white;
+            color: #4f7cff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #eaf0ff;
+        }
+
+        /* Main */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .heading h2 {
+            color: #315dcc;
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        .heading p {
+            color: #64748b;
+        }
+
+        /* Subject Grid */
+        .subject-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        /* Subject Card */
+        .subject-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .subject-number {
+            width: 45px;
+            height: 45px;
+            background: #eaf0ff;
+            color: #315dcc;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .subject-card h3 {
+            color: #315dcc;
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            min-height: 50px;
+        }
+
+        .manage-btn {
+            width: 100%;
+            background: #4f7cff;
+            color: white;
+
+            border: none;
+            padding: 12px;
+
+            border-radius: 8px;
+            cursor: pointer;
+
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .manage-btn:hover {
+            background: #315dcc;
+        }
+
+        .no-subject {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            color: #64748b;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .container {
+                margin: 25px auto;
+                padding: 15px;
+            }
+
+            .heading h2 {
+                font-size: 24px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+
+        <h1>CSE IntelliLearn</h1>
+
+        <button class="back-btn" onclick="goBack()">
+            ← Semester
+        </button>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <div class="heading">
+
+            <h2 id="pageTitle">
+                Select Subject
+            </h2>
+
+            <p>
+                Select a subject to manage units and topics.
+            </p>
+
+        </div>
+
+
+        <!-- Subjects -->
+        <div
+            class="subject-container"
+            id="subjectContainer">
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* Get semester from URL */
+
+        const urlParams =
+            new URLSearchParams(window.location.search);
+
+        const semester =
+            urlParams.get("semester");
+
+
+        /*
+            Same subjects as Student Side
+        */
+
+        const subjects = {
+
+            /* Semester 1 */
+
+            1: [
+                "Physics",
+                "Graphics",
+                "Engineering Mathematics-I",
+                "Basic Civil Engineering",
+                "Basic Electrical Engineering"
+            ],
+
+
+            /* Semester 2 */
+
+            2: [
+                "Engineering Chemistry",
+                "Basic Mechanical Engineering",
+                "Engineering Mechanics",
+                "Basic Electrical Engineering",
+                "Engineering Mathematics-II"
+            ],
+
+
+            /* Semester 3 */
+
+            3: [
+                "Data Structure Using C",
+                "Computer Network",
+                "MDM",
+                "Discrete Mathematical Structure",
+                "OE"
+            ],
+
+
+            /* Semester 4 */
+
+            4: [
+                "Automata Theory",
+                "Operating System",
+                "CPP-OOP",
+                "Soft Skill",
+                "MDM"
+            ],
+
+
+            /* Semester 5 */
+
+            5: [
+                "Subject 1",
+                "Subject 2",
+                "Subject 3",
+                "Subject 4",
+                "Subject 5"
+            ],
+
+
+            /* Semester 6 */
+
+            6: [
+                "Subject 1",
+                "Subject 2",
+                "Subject 3",
+                "Subject 4",
+                "Subject 5"
+            ],
+
+
+            /* Semester 7 */
+
+            7: [
+                "Subject 1",
+                "Subject 2",
+                "Subject 3",
+                "Subject 4",
+                "Subject 5"
+            ],
+
+
+            /* Semester 8 */
+
+            8: [
+                "Subject 1",
+                "Subject 2",
+                "Subject 3",
+                "Subject 4",
+                "Subject 5"
+            ]
+
+        };
+
+
+        /* Page title */
+
+        if (semester) {
+
+            document.getElementById("pageTitle").innerText =
+                "Semester " + semester + " - Subjects";
+
+        }
+
+
+        /* Subject container */
+
+        const subjectContainer =
+            document.getElementById("subjectContainer");
+
+
+        /* Display subjects */
+
+        if (subjects[semester]) {
+
+            subjects[semester].forEach(
+                function(subject, index) {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className =
+                        "subject-card";
+
+
+                    card.innerHTML = `
+
+                        <div class="subject-number">
+                            ${index + 1}
+                        </div>
+
+                        <h3>
+                            ${subject}
+                        </h3>
+
+                        <button
+                            class="manage-btn"
+                            onclick="openTopics('${subject}')">
+
+                            Manage Subject
+
+                        </button>
+
+                    `;
+
+
+                    subjectContainer.appendChild(card);
+
+                }
+            );
+
+        }
+
+        else {
+
+            subjectContainer.innerHTML = `
+
+                <div class="no-subject">
+
+                    <h3>No Subjects Found</h3>
+
+                    <p>
+                        Please select a valid semester.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* Open Topics */
+
+        function openTopics(subject) {
+
+            window.location.href =
+                "teacher-topics.html" +
+                "?subject=" +
+                encodeURIComponent(subject) +
+                "&semester=" +
+                encodeURIComponent(semester);
+
+        }
+
+
+        /* Back to Semester */
+
+        function goBack() {
+
+            const year =
+                getYearFromSemester(semester);
+
+            window.location.href =
+                "teacher-semester.html?year=" + year;
+
+        }
+
+
+        /* Find year from semester */
+
+        function getYearFromSemester(semester) {
+
+            if (semester == 1 || semester == 2) {
+                return 1;
+            }
+
+            if (semester == 3 || semester == 4) {
+                return 2;
+            }
+
+            if (semester == 5 || semester == 6) {
+                return 3;
+            }
+
+            if (semester == 7 || semester == 8) {
+                return 4;
+            }
+
+            return 1;
+        }
+
+    </script>
+
+</body>
+</html>

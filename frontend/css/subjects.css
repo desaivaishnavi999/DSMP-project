@@ -1,0 +1,332 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f4f7fb;
+    font-family: Arial, sans-serif;
+    color: #172554;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.subject-header {
+    background: linear-gradient(
+        135deg,
+        #4F46E5,
+        #0D9488
+    );
+
+    color: white;
+    padding: 35px 20px;
+    text-align: center;
+}
+
+.header-content {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.subject-header h1 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.subject-header p {
+    margin: 10px 0 0;
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.subjects-container {
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 0 20px 40px;
+}
+
+
+/* =========================
+   SEMESTER HEADING
+========================= */
+
+.semester-heading {
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        #e8efff,
+        #e8f8f7
+    );
+
+    padding: 30px 20px;
+
+    border-radius: 16px;
+
+    margin-bottom: 25px;
+}
+
+.semester-heading h2 {
+    margin: 0;
+
+    font-size: 32px;
+
+    color: #172554;
+}
+
+.semester-heading p {
+    margin: 10px 0 0;
+
+    font-size: 17px;
+
+    color: #64748b;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-btn {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    color: #4F46E5;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+.back-btn:hover {
+    color: #3730A3;
+}
+
+
+/* =========================
+   SUBJECT CARD
+========================= */
+
+.subject-card {
+    display: flex;
+
+    align-items: center;
+
+    background: white;
+
+    min-height: 125px;
+
+    margin-bottom: 20px;
+
+    padding: 20px 28px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0, 0, 0, 0.08);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.subject-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 9px 25px
+        rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.subject-icon {
+
+    width: 86px;
+
+    height: 86px;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #6366F1;
+
+    color: white;
+
+    font-size: 42px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* Different icon colors */
+
+.subject-card:nth-child(2)
+.subject-icon {
+    background: #10B981;
+}
+
+.subject-card:nth-child(3)
+.subject-icon {
+    background: #3B82F6;
+}
+
+.subject-card:nth-child(4)
+.subject-icon {
+    background: #F59E0B;
+}
+
+.subject-card:nth-child(5)
+.subject-icon {
+    background: #EF4444;
+}
+
+
+/* =========================
+   NUMBER
+========================= */
+
+.subject-number {
+
+    margin-left: 35px;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    color: #7183a8;
+}
+
+
+/* =========================
+   SUBJECT NAME
+========================= */
+
+.subject-name {
+
+    margin-left: 25px;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    color: #172554;
+
+    flex: 1;
+}
+
+
+/* =========================
+   ARROW
+========================= */
+
+.arrow {
+
+    font-size: 36px;
+
+    color: #7183a8;
+
+    margin-left: 15px;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message {
+
+    text-align: center;
+
+    color: #64748b;
+
+    margin-top: 30px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    text-align: center;
+
+    padding: 25px;
+
+    color: #64748b;
+
+    font-size: 16px;
+}
+
+footer span {
+    margin: 0 8px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .subject-header h1 {
+        font-size: 27px;
+    }
+
+    .semester-heading h2 {
+        font-size: 24px;
+    }
+
+    .subject-card {
+        padding: 16px;
+        min-height: 100px;
+    }
+
+    .subject-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+        border-radius: 14px;
+    }
+
+    .subject-number {
+        margin-left: 15px;
+        font-size: 18px;
+    }
+
+    .subject-name {
+        margin-left: 12px;
+        font-size: 17px;
+    }
+
+    .arrow {
+        font-size: 25px;
+    }
+
+}

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile - CSE IntelliLearn</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8ff;
+            color: #1e293b;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        header h1 {
+            font-size: 25px;
+        }
+
+        .back-btn {
+            background: white;
+            color: #2563eb;
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #eaf1ff;
+        }
+
+        /* Main Container */
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Profile Top */
+        .profile-top {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-icon {
+            width: 95px;
+            height: 95px;
+            background: #dbeafe;
+            color: #2563eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            margin: auto;
+        }
+
+        .profile-top h2 {
+            margin-top: 15px;
+            color: #1d4ed8;
+            font-size: 25px;
+        }
+
+        .profile-top p {
+            color: #64748b;
+            margin-top: 6px;
+        }
+
+        /* Information Section */
+        .info-section {
+            margin-top: 28px;
+        }
+
+        .info-section h3 {
+            color: #1d4ed8;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 8px;
+        }
+
+        /* Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .info-box {
+            background: #f8fbff;
+            border: 1px solid #dbeafe;
+            padding: 16px;
+            border-radius: 10px;
+        }
+
+        .info-box label {
+            display: block;
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .info-box span {
+            color: #1e293b;
+            font-weight: bold;
+        }
+
+        /* Logout */
+        .logout-btn {
+            display: block;
+            margin: 32px auto 0;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 25px auto;
+            }
+
+            .profile-card {
+                padding: 25px 18px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+
+        <h1>CSE IntelliLearn</h1>
+
+        <a href="student-dashboard.html" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- Main -->
+    <div class="container">
+
+        <div class="profile-card">
+
+            <!-- Profile -->
+            <div class="profile-top">
+
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <h2 id="studentName">
+                    Vaishnavi Desai
+                </h2>
+
+                <p>
+                    CSE Student
+                </p>
+
+            </div>
+
+
+            <!-- Personal Information -->
+            <div class="info-section">
+
+                <h3>Personal Information</h3>
+
+                <div class="info-grid">
+
+                    <div class="info-box">
+
+                        <label>Full Name</label>
+
+                        <span>
+                            Vaishnavi Desai
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <label>Email</label>
+
+                        <span>
+                            student@intellilearn.com
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <label>Roll Number</label>
+
+                        <span>
+                            13
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <label>Department</label>
+
+                        <span>
+                            Computer Science & Engineering
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Academic Information -->
+            <div class="info-section">
+
+                <h3>Academic Information</h3>
+
+                <div class="info-grid">
+
+                    <div class="info-box">
+
+                        <label>Year</label>
+
+                        <span>
+                            Second Year
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <label>Course</label>
+
+                        <span>
+                            B.Tech CSE
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <label>University</label>
+
+                        <span>
+                            Shivaji University
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <label>College</label>
+
+                        <span>
+                            SGMCOE
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Logout -->
+            <button class="logout-btn" onclick="logout()">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function logout() {
+
+            // Clear temporary login/session data
+            localStorage.clear();
+
+            // Go back to login page
+            window.location.href = "../login.html";
+
+        }
+
+    </script>
+
+</body>
+</html>

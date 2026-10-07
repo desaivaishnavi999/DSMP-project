@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSE IntelliLearn - Submit Assignment</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f9ff;
+            color: #1e293b;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4F46E5, #0D9488);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            color: #1d4ed8;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .assignment-info,
+        .submit-box {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .assignment-info h2,
+        .submit-box h2 {
+            color: #4F46E5;
+            margin-bottom: 18px;
+        }
+
+        .info-row {
+            margin-bottom: 12px;
+            color: #475569;
+        }
+
+        .info-row strong {
+            color: #1e293b;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            resize: vertical;
+            font-size: 15px;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        textarea:focus {
+            border-color: #2563eb;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background: #f8fafc;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button,
+        .cancel-btn {
+            padding: 11px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .submit-btn {
+            background: #4F46E5;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #4338ca;
+        }
+
+        .cancel-btn {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .success-message {
+            display: none;
+            background: #dcfce7;
+            color: #166534;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 18px 20px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>CSE IntelliLearn</h1>
+
+        <a href="assignments.html" class="back-btn">
+            ← Assignments
+        </a>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+        <h2 class="page-title">
+            Submit Assignment
+        </h2>
+
+        <p class="subtitle">
+            View assignment details and submit your work.
+        </p>
+
+
+        <!-- ASSIGNMENT INFORMATION -->
+
+        <div class="assignment-info">
+
+            <h2 id="assignmentTitle">
+                Assignment
+            </h2>
+
+            <div class="info-row">
+                <strong>Subject:</strong>
+                <span id="subjectName">-</span>
+            </div>
+
+            <div class="info-row">
+                <strong>Semester:</strong>
+                <span id="semesterName">-</span>
+            </div>
+
+            <div class="info-row">
+                <strong>Unit:</strong>
+                <span id="unitName">-</span>
+            </div>
+
+            <div class="info-row">
+                <strong>Topic:</strong>
+                <span id="topicName">-</span>
+            </div>
+
+            <div class="info-row">
+                <strong>Due Date:</strong>
+                <span id="dueDate">-</span>
+            </div>
+
+        </div>
+
+
+        <!-- SUBMISSION FORM -->
+
+        <div class="submit-box">
+
+            <h2>
+                Your Submission
+            </h2>
+
+            <form id="assignmentForm">
+
+                <label for="answer">
+                    Write your answer / description
+                </label>
+
+                <textarea
+                    id="answer"
+                    placeholder="Enter your assignment answer or submission details..."
+                    required>
+                </textarea>
+
+
+                <label for="file">
+                    Upload Assignment File
+                </label>
+
+                <input
+                    type="file"
+                    id="file"
+                    accept=".pdf,.doc,.docx,.zip">
+
+
+                <div class="button-group">
+
+                    <button
+                        type="submit"
+                        class="submit-btn">
+
+                        Submit Assignment
+
+                    </button>
+
+                    <a
+                        href="assignments.html"
+                        class="cancel-btn">
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="successMessage"
+                    class="success-message">
+
+                    Assignment submitted successfully! ✓
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // Get URL parameters
+
+        const params =
+            new URLSearchParams(window.location.search);
+
+
+        const title =
+            params.get("title");
+
+        const subject =
+            params.get("subject");
+
+        const semester =
+            params.get("semester");
+
+        const unit =
+            params.get("unit");
+
+        const topic =
+            params.get("topic");
+
+        const dueDate =
+            params.get("dueDate");
+
+
+        // Display assignment information
+
+        document.getElementById("assignmentTitle")
+            .textContent =
+            title || "Assignment";
+
+
+        document.getElementById("subjectName")
+            .textContent =
+            subject || "-";
+
+
+        document.getElementById("semesterName")
+            .textContent =
+            semester || "-";
+
+
+        document.getElementById("unitName")
+            .textContent =
+            unit || "-";
+
+
+        document.getElementById("topicName")
+            .textContent =
+            topic || "-";
+
+
+        document.getElementById("dueDate")
+            .textContent =
+            dueDate || "Not specified";
+
+
+        // Submit Assignment
+
+        document.getElementById("assignmentForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                document.getElementById("successMessage")
+                    .style.display = "block";
+
+
+                // Save temporary submission data
+
+                const submission = {
+
+                    title: title,
+
+                    subject: subject,
+
+                    semester: semester,
+
+                    unit: unit,
+
+                    topic: topic,
+
+                    dueDate: dueDate,
+
+                    answer:
+                        document.getElementById("answer").value,
+
+                    file:
+                        document.getElementById("file").files[0]
+                            ? document.getElementById("file").files[0].name
+                            : "No file uploaded"
+
+                };
+
+
+                localStorage.setItem(
+                    "lastAssignmentSubmission",
+                    JSON.stringify(submission)
+                );
+
+
+                document.getElementById("assignmentForm")
+                    .reset();
+
+            });
+
+    </script>
+
+</body>
+
+</html>

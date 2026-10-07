@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CSE IntelliLearn - Topics</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f7fb;
+            font-family: Arial, sans-serif;
+            color: #172554;
+        }
+
+        /* HEADER */
+
+        .topics-header {
+            background: linear-gradient(
+                135deg,
+                #4F46E5,
+                #0D9488
+            );
+
+            color: white;
+
+            padding: 35px 20px;
+
+            text-align: center;
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .topics-header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        .topics-header p {
+            margin: 10px 0 0;
+            font-size: 18px;
+        }
+
+
+        /* MAIN */
+
+        .topics-container {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px 40px;
+        }
+
+
+        /* HEADING */
+
+        .unit-heading {
+            text-align: center;
+
+            background: linear-gradient(
+                135deg,
+                #e8efff,
+                #e8f8f7
+            );
+
+            padding: 30px 20px;
+
+            border-radius: 16px;
+
+            margin-bottom: 25px;
+        }
+
+        .unit-heading h2 {
+            margin: 0;
+
+            font-size: 32px;
+
+            color: #172554;
+        }
+
+        .unit-heading p {
+            margin: 10px 0 0;
+
+            font-size: 17px;
+
+            color: #64748b;
+        }
+
+
+        /* BACK */
+
+        .back-btn {
+            display: inline-block;
+
+            margin-bottom: 20px;
+
+            color: #4F46E5;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            color: #3730A3;
+        }
+
+
+        /* TOPIC CARD */
+
+        .topic-card {
+            display: flex;
+
+            align-items: center;
+
+            background: white;
+
+            min-height: 120px;
+
+            margin-bottom: 20px;
+
+            padding: 20px 28px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(0, 0, 0, 0.08);
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 9px 25px
+                rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* ICON */
+
+        .topic-icon {
+            width: 80px;
+            height: 80px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            background: #6366F1;
+
+            color: white;
+
+            font-size: 35px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* NUMBER */
+
+        .topic-number {
+            margin-left: 30px;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #7183a8;
+        }
+
+
+        /* NAME */
+
+        .topic-name {
+            margin-left: 22px;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #172554;
+
+            flex: 1;
+        }
+
+
+        /* ARROW */
+
+        .topic-arrow {
+            font-size: 32px;
+
+            color: #7183a8;
+        }
+
+
+        /* HOVER */
+
+        .topic-card:hover .topic-icon {
+            background: #0D9488;
+        }
+
+        .topic-card:hover .topic-name {
+            color: #4F46E5;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .topics-header h1 {
+                font-size: 27px;
+            }
+
+            .unit-heading h2 {
+                font-size: 24px;
+            }
+
+            .topic-card {
+                min-height: 100px;
+                padding: 16px;
+            }
+
+            .topic-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+            }
+
+            .topic-number {
+                margin-left: 15px;
+                font-size: 18px;
+            }
+
+            .topic-name {
+                margin-left: 12px;
+                font-size: 17px;
+            }
+
+            .topic-arrow {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="topics-header">
+
+    <div class="header-content">
+
+        <h1>🎓 CSE IntelliLearn</h1>
+
+        <p>Learn • Practice • Grow</p>
+
+    </div>
+
+</header>
+
+
+<main class="topics-container">
+
+
+    <section class="unit-heading">
+
+        <h2 id="subjectTitle">
+            Subject
+        </h2>
+
+        <p id="unitTitle">
+            Select a topic to study.
+        </p>
+
+    </section>
+
+
+    <a href="javascript:history.back()"
+       class="back-btn">
+
+        ← Back
+
+    </a>
+
+
+    <div id="topicList"></div>
+
+
+</main>
+
+
+<script>
+
+const subject =
+    localStorage.getItem("selectedSubject");
+
+const unit =
+    localStorage.getItem("selectedUnit");
+
+const topics =
+    JSON.parse(
+        localStorage.getItem("selectedTopics") || "[]"
+    );
+
+
+document.getElementById("subjectTitle").innerText =
+    subject || "Subject";
+
+
+document.getElementById("unitTitle").innerText =
+    unit || "Select a topic to study.";
+
+
+const topicList =
+    document.getElementById("topicList");
+
+
+topics.forEach(function(topic, index) {
+
+    const card =
+        document.createElement("div");
+
+    card.className = "topic-card";
+
+
+    card.innerHTML = `
+
+        <div class="topic-icon">
+            📖
+        </div>
+
+        <div class="topic-number">
+            ${index + 1}.
+        </div>
+
+        <div class="topic-name">
+            ${topic}
+        </div>
+
+        <div class="topic-arrow">
+            →
+        </div>
+
+    `;
+
+
+    card.onclick = function() {
+
+        window.location.href =
+            "notes.html?subject=" +
+            encodeURIComponent(subject) +
+            "&unit=" +
+            encodeURIComponent(unit) +
+            "&topic=" +
+            encodeURIComponent(topic);
+
+    };
+
+
+    topicList.appendChild(card);
+
+});
+
+</script>
+
+
+</body>
+
+</html>

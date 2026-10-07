@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSE IntelliLearn - Assignments</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4F46E5, #0D9488);
+            color: white;
+            padding: 22px;
+        }
+
+        header h1 {
+            margin-bottom: 5px;
+        }
+
+        header p {
+            opacity: 0.9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 15px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #4F46E5;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+
+        .filter {
+            margin-bottom: 25px;
+        }
+
+        .filter label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 7px;
+            border: 1px solid #d1d5db;
+        }
+
+        .assignment-card {
+            background: white;
+            padding: 22px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .assignment-card h2 {
+            color: #4F46E5;
+            margin-bottom: 10px;
+        }
+
+        .assignment-card p {
+            margin: 7px 0;
+            color: #4b5563;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .submitted {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .checked {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .action-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #0D9488;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            margin-top: 8px;
+        }
+
+        .action-btn:hover {
+            background: #0f766e;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 94%;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Assignments</h1>
+        <p>View and submit your academic assignments</p>
+    </header>
+
+    <div class="container">
+
+        <div class="top-bar">
+
+            <h2>My Assignments</h2>
+
+            <a href="student-dashboard.html" class="back-btn">
+                ← Dashboard
+            </a>
+
+        </div>
+
+        <!-- Semester Filter -->
+
+        <div class="filter">
+
+            <label for="semesterFilter">
+                Select Semester:
+            </label>
+
+            <select id="semesterFilter">
+
+                <option value="all">
+                    All Semesters
+                </option>
+
+                <option value="3">
+                    Semester 3
+                </option>
+
+                <option value="4">
+                    Semester 4
+                </option>
+
+                <option value="5">
+                    Semester 5
+                </option>
+
+                <option value="6">
+                    Semester 6
+                </option>
+
+                <option value="7">
+                    Semester 7
+                </option>
+
+                <option value="8">
+                    Semester 8
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Assignment 1 -->
+
+        <div class="assignment-card" data-semester="3">
+
+            <h2>
+                Data Structure Assignment
+            </h2>
+
+            <p>
+                <strong>Subject:</strong>
+                Data Structure Using C
+            </p>
+
+            <p>
+                <strong>Semester:</strong>
+                Semester 3
+            </p>
+
+            <p>
+                <strong>Unit:</strong>
+                Unit 1
+            </p>
+
+            <p>
+                <strong>Due Date:</strong>
+                05 October 2026
+            </p>
+
+            <span class="status pending">
+                Pending
+            </span>
+
+            <br>
+
+            <a href="assignment-details.html?title=Data%20Structure%20Assignment&subject=Data%20Structure%20Using%20C&semester=Semester%203&unit=Unit%201"
+               class="action-btn">
+
+                View Assignment →
+
+            </a>
+
+        </div>
+
+
+        <!-- Assignment 2 -->
+
+        <div class="assignment-card" data-semester="3">
+
+            <h2>
+                Computer Network Assignment
+            </h2>
+
+            <p>
+                <strong>Subject:</strong>
+                Computer Network
+            </p>
+
+            <p>
+                <strong>Semester:</strong>
+                Semester 3
+            </p>
+
+            <p>
+                <strong>Unit:</strong>
+                Unit 2
+            </p>
+
+            <p>
+                <strong>Due Date:</strong>
+                08 October 2026
+            </p>
+
+            <span class="status submitted">
+                Submitted
+            </span>
+
+            <br>
+
+            <a href="assignment-details.html?title=Computer%20Network%20Assignment&subject=Computer%20Network&semester=Semester%203&unit=Unit%202"
+               class="action-btn">
+
+                View Assignment →
+
+            </a>
+
+        </div>
+
+
+        <!-- Assignment 3 -->
+
+        <div class="assignment-card" data-semester="4">
+
+            <h2>
+                Operating System Assignment
+            </h2>
+
+            <p>
+                <strong>Subject:</strong>
+                Operating System
+            </p>
+
+            <p>
+                <strong>Semester:</strong>
+                Semester 4
+            </p>
+
+            <p>
+                <strong>Unit:</strong>
+                Unit 1
+            </p>
+
+            <p>
+                <strong>Due Date:</strong>
+                10 October 2026
+            </p>
+
+            <span class="status checked">
+                Checked
+            </span>
+
+            <br>
+
+            <a href="assignment-details.html?title=Operating%20System%20Assignment&subject=Operating%20System&semester=Semester%204&unit=Unit%201"
+               class="action-btn">
+
+                View Assignment →
+
+            </a>
+
+        </div>
+
+
+        <!-- No Assignment Message -->
+
+        <div id="noAssignment"
+             class="assignment-card hidden">
+
+            <h3>
+                No assignments found
+            </h3>
+
+            <p>
+                There are no assignments available
+                for the selected semester.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const semesterFilter =
+            document.getElementById("semesterFilter");
+
+        const assignmentCards =
+            document.querySelectorAll(".assignment-card[data-semester]");
+
+        const noAssignment =
+            document.getElementById("noAssignment");
+
+
+        semesterFilter.addEventListener("change", function () {
+
+            const selectedSemester =
+                this.value;
+
+            let visibleCount = 0;
+
+
+            assignmentCards.forEach(function (card) {
+
+                const cardSemester =
+                    card.getAttribute("data-semester");
+
+
+                if (
+                    selectedSemester === "all" ||
+                    selectedSemester === cardSemester
+                ) {
+
+                    card.style.display = "block";
+
+                    visibleCount++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            if (visibleCount === 0) {
+
+                noAssignment.classList.remove("hidden");
+
+            } else {
+
+                noAssignment.classList.add("hidden");
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

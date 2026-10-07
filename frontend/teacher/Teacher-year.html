@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Select Year - Teacher | CSE IntelliLearn</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8ff;
+            color: #1e293b;
+        }
+
+        header {
+            background: #4f7cff;
+            color: white;
+            padding: 18px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 25px;
+        }
+
+        .back-btn {
+            background: white;
+            color: #4f7cff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .heading h2 {
+            color: #315dcc;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #64748b;
+        }
+
+        .year-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .year-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .year-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .year-card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .year-card h3 {
+            color: #315dcc;
+            margin-bottom: 10px;
+        }
+
+        .year-card p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .year-card button {
+            background: #4f7cff;
+            color: white;
+            border: none;
+            padding: 11px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .year-card button:hover {
+            background: #315dcc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <h1>CSE IntelliLearn</h1>
+
+        <button class="back-btn" onclick="goBack()">
+            ← Dashboard
+        </button>
+
+    </header>
+
+
+    <div class="container">
+
+        <div class="heading">
+            <h2>Select Academic Year</h2>
+            <p>Select a year to manage its semesters and subjects.</p>
+        </div>
+
+
+        <div class="year-container">
+
+            <!-- First Year -->
+            <div class="year-card">
+                <div class="icon">🎓</div>
+
+                <h3>First Year</h3>
+
+                <p>Semester 1 & Semester 2</p>
+
+                <button onclick="openSemester(1)">
+                    Select
+                </button>
+            </div>
+
+
+            <!-- Second Year -->
+            <div class="year-card">
+                <div class="icon">📘</div>
+
+                <h3>Second Year</h3>
+
+                <p>Semester 3 & Semester 4</p>
+
+                <button onclick="openSemester(2)">
+                    Select
+                </button>
+            </div>
+
+
+            <!-- Third Year -->
+            <div class="year-card">
+                <div class="icon">📚</div>
+
+                <h3>Third Year</h3>
+
+                <p>Semester 5 & Semester 6</p>
+
+                <button onclick="openSemester(3)">
+                    Select
+                </button>
+            </div>
+
+
+            <!-- Final Year -->
+            <div class="year-card">
+                <div class="icon">🏆</div>
+
+                <h3>Final Year</h3>
+
+                <p>Semester 7 & Semester 8</p>
+
+                <button onclick="openSemester(4)">
+                    Select
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function openSemester(year) {
+
+            window.location.href =
+                "teacher-semester.html?year=" + year;
+
+        }
+
+
+        function goBack() {
+
+            window.location.href =
+                "teacher-dashboard.html";
+
+        }
+
+    </script>
+
+</body>
+</html>

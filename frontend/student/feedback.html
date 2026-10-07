@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Feedback - CSE IntelliLearn</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8ff;
+            color: #1e293b;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        header h1 {
+            font-size: 25px;
+        }
+
+        .back-btn {
+            background: white;
+            color: #2563eb;
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h2 {
+            color: #1d4ed8;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #64748b;
+        }
+
+        /* Card */
+        .feedback-card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(37,99,235,0.10);
+        }
+
+        .assignment-title {
+            color: #1d4ed8;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        /* Details */
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .detail-box {
+            background: #f8fbff;
+            border: 1px solid #dbeafe;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .detail-box label {
+            display: block;
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .detail-box span {
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        /* Status */
+        .status {
+            display: inline-block;
+            background: #dcfce7;
+            color: #15803d;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        /* Marks */
+        .marks-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .marks-box h3 {
+            color: #1d4ed8;
+            margin-bottom: 10px;
+        }
+
+        .marks {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        /* Feedback */
+        .feedback-section {
+            margin-top: 20px;
+        }
+
+        .feedback-section h3 {
+            color: #1d4ed8;
+            margin-bottom: 12px;
+        }
+
+        .feedback-text {
+            background: #f8fafc;
+            border-left: 5px solid #2563eb;
+            padding: 18px;
+            border-radius: 8px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .teacher {
+            margin-top: 15px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Date */
+        .updated {
+            text-align: right;
+            margin-top: 20px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 25px auto;
+            }
+
+            .feedback-card {
+                padding: 22px;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+
+        <h1>CSE IntelliLearn</h1>
+
+        <a href="assignments.html" class="back-btn">
+            ← Assignments
+        </a>
+
+    </header>
+
+
+    <!-- Main -->
+    <div class="container">
+
+        <div class="page-title">
+
+            <h2>Teacher Feedback</h2>
+
+            <p>View your assignment result and teacher's feedback</p>
+
+        </div>
+
+
+        <div class="feedback-card">
+
+            <h2 class="assignment-title" id="assignmentTitle">
+                Data Structure Assignment
+            </h2>
+
+
+            <!-- Status -->
+            <span class="status">
+                ✓ Checked
+            </span>
+
+
+            <!-- Assignment Details -->
+            <div class="details">
+
+                <div class="detail-box">
+
+                    <label>Subject</label>
+
+                    <span id="subject">
+                        Data Structure Using C
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <label>Unit</label>
+
+                    <span id="unit">
+                        Unit 1
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <label>Topic</label>
+
+                    <span id="topic">
+                        Topic 1
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <label>Submission Date</label>
+
+                    <span>
+                        03 October 2026
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Marks -->
+            <div class="marks-box">
+
+                <h3>Your Marks</h3>
+
+                <div class="marks">
+                    8 / 10
+                </div>
+
+            </div>
+
+
+            <!-- Feedback -->
+            <div class="feedback-section">
+
+                <h3>Teacher's Feedback</h3>
+
+                <div class="feedback-text" id="feedbackText">
+
+                    Good solution. Your answer is well structured.
+                    Improve the explanation of time complexity
+                    for a better understanding.
+
+                </div>
+
+                <div class="teacher">
+
+                    <strong>Reviewed by:</strong>
+                    CSE Faculty
+
+                </div>
+
+            </div>
+
+
+            <!-- Updated -->
+            <div class="updated">
+
+                Last updated:
+                05 October 2026, 04:15 PM
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /*
+            Later, backend मधून खालील data येईल:
+
+            assignment title
+            subject
+            unit
+            topic
+            marks
+            feedback
+            teacher
+            checked date
+
+            आत्ता frontend demo data वापरले आहे.
+        */
+
+        const feedbackData = {
+
+            assignmentTitle:
+                "Data Structure Assignment",
+
+            subject:
+                "Data Structure Using C",
+
+            unit:
+                "Unit 1",
+
+            topic:
+                "Topic 1",
+
+            marks:
+                "8 / 10",
+
+            feedback:
+                "Good solution. Your answer is well structured. Improve the explanation of time complexity for a better understanding."
+
+        };
+
+
+        // Save demo feedback
+        localStorage.setItem(
+            "teacherFeedback",
+            JSON.stringify(feedbackData)
+        );
+
+
+        // Load feedback
+        const savedFeedback =
+            localStorage.getItem("teacherFeedback");
+
+        if (savedFeedback) {
+
+            const data =
+                JSON.parse(savedFeedback);
+
+            document.getElementById(
+                "assignmentTitle"
+            ).textContent =
+                data.assignmentTitle;
+
+            document.getElementById(
+                "subject"
+            ).textContent =
+                data.subject;
+
+            document.getElementById(
+                "unit"
+            ).textContent =
+                data.unit;
+
+            document.getElementById(
+                "topic"
+            ).textContent =
+                data.topic;
+
+            document.querySelector(
+                ".marks"
+            ).textContent =
+                data.marks;
+
+            document.getElementById(
+                "feedbackText"
+            ).textContent =
+                data.feedback;
+        }
+
+    </script>
+
+</body>
+</html>

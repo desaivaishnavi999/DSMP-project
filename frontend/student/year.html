@@ -5,167 +5,491 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>Select Year - CSE IntelliLearn</title>
+    <title>CSE IntelliLearn - Select Year</title>
 
-    <link rel="stylesheet" href="../css/student.css">
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #f5f9ff;
+
+            color: #12305b;
+        }
+
+
+        /* HEADER */
+
+        .page-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f3d91,
+                    #2563eb
+                );
+
+            color: white;
+
+            padding: 28px 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px
+                rgba(37, 99, 235, 0.20);
+        }
+
+
+        .page-header h1 {
+            margin: 0;
+
+            font-size: 32px;
+        }
+
+
+        .page-header p {
+            margin: 10px 0 0;
+
+            color: #eaf2ff;
+
+            font-size: 16px;
+        }
+
+
+        /* CONTAINER */
+
+        .container {
+            max-width: 1100px;
+
+            margin: 35px auto;
+
+            padding: 0 20px 40px;
+        }
+
+
+        .back-btn {
+            display: inline-block;
+
+            margin-bottom: 25px;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            font-size: 16px;
+        }
+
+
+        .back-btn:hover {
+            color: #0f3d91;
+        }
+
+
+        /* HEADING */
+
+        .heading-card {
+            background: white;
+
+            padding: 28px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+            border-left: 5px solid #2563eb;
+
+            box-shadow:
+                0 5px 20px
+                rgba(30, 64, 175, 0.08);
+        }
+
+
+        .heading-card h2 {
+            margin: 0;
+
+            font-size: 28px;
+
+            color: #12305b;
+        }
+
+
+        .heading-card p {
+            margin: 10px 0 0;
+
+            color: #64748b;
+        }
+
+
+        /* YEAR GRID */
+
+        .year-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 25px;
+        }
+
+
+        .year-card {
+            background: white;
+
+            padding: 30px;
+
+            min-height: 180px;
+
+            border-radius: 18px;
+
+            border: 1px solid #e1eaf8;
+
+            box-shadow:
+                0 5px 20px
+                rgba(30, 64, 175, 0.08);
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+        }
+
+
+        .year-card:hover {
+            transform: translateY(-5px);
+
+            border-color: #93c5fd;
+
+            box-shadow:
+                0 10px 28px
+                rgba(30, 64, 175, 0.15);
+        }
+
+
+        .year-icon {
+            width: 80px;
+
+            height: 80px;
+
+            border-radius: 18px;
+
+            background: #eaf2ff;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 38px;
+
+            flex-shrink: 0;
+        }
+
+
+        .year-card:hover .year-icon {
+            background: #dbeafe;
+        }
+
+
+        .year-info {
+            flex: 1;
+        }
+
+
+        .year-info h3 {
+            margin: 0;
+
+            font-size: 23px;
+
+            color: #12305b;
+        }
+
+
+        .year-info p {
+            margin: 8px 0 0;
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        .arrow {
+            font-size: 30px;
+
+            color: #2563eb;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            padding: 25px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .year-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+
+            .year-card {
+                padding: 22px;
+            }
+
+
+            .year-icon {
+                width: 65px;
+
+                height: 65px;
+
+                font-size: 30px;
+            }
+
+
+            .year-info h3 {
+                font-size: 19px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-    <!-- HEADER -->
 
-    <header>
+<!-- HEADER -->
 
-        <div class="logo">
-            CSE IntelliLearn
-        </div>
+<header class="page-header">
 
-        <div class="student-info">
+    <h1>
+        🎓 CSE IntelliLearn
+    </h1>
 
-            <span>👩‍🎓 Student</span>
+    <p>
+        Select your academic year
+    </p>
 
-            <a href="student-dashboard.html">
-                Dashboard
-            </a>
-
-        </div>
-
-    </header>
+</header>
 
 
-    <!-- MAIN -->
 
-    <main>
+<!-- MAIN -->
 
-        <div class="welcome">
-
-            <p class="small-title">
-                ✦ MY COURSES ✦
-            </p>
-
-            <h1>
-                Select Your Year
-            </h1>
-
-            <p>
-                Choose your academic year to continue.
-            </p>
-
-        </div>
+<main class="container">
 
 
-        <!-- YEAR CARDS -->
+    <a
+        href="student-dashboard.html"
+        class="back-btn">
 
-        <section class="academic-section">
+        ← Back to Dashboard
 
-            <div class="dashboard-grid">
-
-                <div class="dashboard-card">
-
-                    <div class="icon">
-                        1
-                    </div>
-
-                    <h3>
-                        First Year
-                    </h3>
-
-                    <p>
-                        Explore subjects and learning
-                        materials for First Year CSE.
-                    </p>
-
-                    <button onclick="location.href='semester.html'">
-                        Select Year
-                    </button>
-
-                </div>
+    </a>
 
 
-                <div class="dashboard-card">
+    <div class="heading-card">
 
-                    <div class="icon">
-                        2
-                    </div>
+        <h2>
+            Select Year
+        </h2>
 
-                    <h3>
-                        Second Year
-                    </h3>
+        <p>
+            Choose your year to view available semesters.
+        </p>
 
-                    <p>
-                        Explore subjects and learning
-                        materials for Second Year CSE.
-                    </p>
-
-                    <button onclick="location.href='semester.html'">
-                        Select Year
-                    </button>
-
-                </div>
+    </div>
 
 
-                <div class="dashboard-card">
 
-                    <div class="icon">
-                        3
-                    </div>
-
-                    <h3>
-                        Third Year
-                    </h3>
-
-                    <p>
-                        Explore subjects and learning
-                        materials for Third Year CSE.
-                    </p>
-
-                    <button onclick="location.href='semester.html'">
-                        Select Year
-                    </button>
-
-                </div>
+    <div class="year-grid">
 
 
-                <div class="dashboard-card">
+        <!-- FIRST YEAR -->
 
-                    <div class="icon">
-                        4
-                    </div>
+        <div
+            class="year-card"
+            onclick="openSemester(1)">
 
-                    <h3>
-                        Final Year
-                    </h3>
+            <div class="year-icon">
+                🎓
+            </div>
 
-                    <p>
-                        Explore subjects and learning
-                        materials for Final Year CSE.
-                    </p>
+            <div class="year-info">
 
-                    <button onclick="location.href='semester.html'">
-                        Select Year
-                    </button>
+                <h3>
+                    First Year
+                </h3>
 
-                </div>
+                <p>
+                    Semester 1 & Semester 2
+                </p>
 
             </div>
 
-        </section>
+            <div class="arrow">
+                →
+            </div>
 
-    </main>
+        </div>
 
 
-    <!-- FOOTER -->
 
-    <footer>
+        <!-- SECOND YEAR -->
 
-        <p>
-            © 2026 CSE IntelliLearn
-        </p>
+        <div
+            class="year-card"
+            onclick="openSemester(2)">
 
-    </footer>
+            <div class="year-icon">
+                📘
+            </div>
+
+            <div class="year-info">
+
+                <h3>
+                    Second Year
+                </h3>
+
+                <p>
+                    Semester 3 & Semester 4
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+        </div>
+
+
+
+        <!-- THIRD YEAR -->
+
+        <div
+            class="year-card"
+            onclick="openSemester(3)">
+
+            <div class="year-icon">
+                📚
+            </div>
+
+            <div class="year-info">
+
+                <h3>
+                    Third Year
+                </h3>
+
+                <p>
+                    Semester 5 & Semester 6
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+        </div>
+
+
+
+        <!-- FINAL YEAR -->
+
+        <div
+            class="year-card"
+            onclick="openSemester(4)">
+
+            <div class="year-icon">
+                🏆
+            </div>
+
+            <div class="year-info">
+
+                <h3>
+                    Final Year
+                </h3>
+
+                <p>
+                    Semester 7 & Semester 8
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+
+<footer>
+
+    © 2026 CSE IntelliLearn
+    <br>
+    Learn • Practice • Grow
+
+</footer>
+
+
+
+<script>
+
+function openSemester(year) {
+
+    window.location.href =
+        "semester.html?year=" + year;
+
+}
+
+</script>
+
 
 </body>
 

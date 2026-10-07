@@ -5,136 +5,644 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>Notes - CSE IntelliLearn</title>
+    <title>CSE IntelliLearn - Notes</title>
 
-    <link rel="stylesheet" href="../css/student.css">
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f9ff;
+            font-family: Arial, sans-serif;
+            color: #12305b;
+        }
+
+        /* HEADER */
+
+        .page-header {
+            background: linear-gradient(
+                135deg,
+                #0f3d91,
+                #2563eb
+            );
+
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px
+                rgba(37, 99, 235, 0.20);
+        }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .page-header p {
+            margin: 10px 0 0;
+            color: #eaf2ff;
+        }
+
+
+        /* CONTAINER */
+
+        .container {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 0 20px 40px;
+        }
+
+
+        /* BACK */
+
+        .back-btn {
+            display: inline-block;
+
+            margin-bottom: 20px;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-size: 17px;
+
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            color: #0f3d91;
+        }
+
+
+        /* TOPIC INFORMATION */
+
+        .topic-header {
+            background: white;
+
+            padding: 30px 25px;
+
+            border-radius: 18px;
+
+            margin-bottom: 25px;
+
+            text-align: center;
+
+            border-left: 5px solid #2563eb;
+
+            box-shadow:
+                0 5px 20px
+                rgba(30, 64, 175, 0.08);
+        }
+
+        .topic-header h2 {
+            margin: 0;
+
+            font-size: 28px;
+
+            color: #12305b;
+        }
+
+        .topic-header p {
+            margin: 10px 0 0;
+
+            color: #64748b;
+
+            font-size: 16px;
+        }
+
+
+        /* INFO */
+
+        .info-box {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            margin-top: 18px;
+        }
+
+        .info-item {
+            background: #eaf2ff;
+
+            color: #2563eb;
+
+            padding: 9px 16px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+
+        /* OPTION CARDS */
+
+        .option-card {
+            display: flex;
+
+            align-items: center;
+
+            background: white;
+
+            min-height: 115px;
+
+            margin-bottom: 20px;
+
+            padding: 22px 25px;
+
+            border-radius: 16px;
+
+            border: 1px solid #e1eaf8;
+
+            box-shadow:
+                0 5px 18px
+                rgba(30, 64, 175, 0.08);
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .option-card:hover {
+            transform: translateY(-3px);
+
+            border-color: #93c5fd;
+
+            box-shadow:
+                0 9px 25px
+                rgba(30, 64, 175, 0.13);
+        }
+
+
+        /* ICON */
+
+        .option-icon {
+            width: 70px;
+            height: 70px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            background: #eaf2ff;
+
+            font-size: 32px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* TEXT */
+
+        .option-content {
+            margin-left: 25px;
+
+            flex: 1;
+        }
+
+        .option-content h3 {
+            margin: 0;
+
+            font-size: 21px;
+
+            color: #12305b;
+        }
+
+        .option-content p {
+            margin: 8px 0 0;
+
+            color: #64748b;
+
+            font-size: 15px;
+        }
+
+
+        /* ARROW */
+
+        .option-arrow {
+            font-size: 30px;
+
+            color: #2563eb;
+        }
+
+
+        /* MESSAGE */
+
+        #message {
+            text-align: center;
+
+            margin-top: 30px;
+
+            color: #64748b;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            padding: 25px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .topic-header h2 {
+                font-size: 23px;
+            }
+
+            .option-card {
+                min-height: 100px;
+
+                padding: 16px;
+            }
+
+            .option-icon {
+                width: 55px;
+                height: 55px;
+
+                font-size: 26px;
+            }
+
+            .option-content {
+                margin-left: 15px;
+            }
+
+            .option-content h3 {
+                font-size: 17px;
+            }
+
+            .option-content p {
+                font-size: 13px;
+            }
+
+            .option-arrow {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-    <header>
 
-        <div class="logo">
-            CSE IntelliLearn
-        </div>
+<header class="page-header">
 
-        <div class="student-info">
+    <h1>
+        🎓 CSE IntelliLearn
+    </h1>
 
-            <span>👩‍🎓 Student</span>
+    <p>
+        Learn • Practice • Grow
+    </p>
 
-            <a href="topics.html">
-                ← Back to Units
-            </a>
-
-        </div>
-
-    </header>
+</header>
 
 
-    <main>
-
-        <div class="welcome">
-
-            <p class="small-title">
-                ✦ STUDY MATERIAL ✦
-            </p>
-
-            <h1>
-                Data Structures - Unit 1
-            </h1>
-
-            <p>
-                Notes and study material for this unit.
-            </p>
-
-        </div>
+<main class="container">
 
 
-        <section class="academic-section">
+    <a
+        href="javascript:history.back()"
+        class="back-btn">
 
-            <h2>
-                PDF Notes
-            </h2>
+        ← Back
 
-
-            <div class="dashboard-grid">
-
-
-                <!-- PDF CARD -->
-
-                <div class="dashboard-card">
-
-                    <div class="icon">
-                        📄
-                    </div>
-
-                    <h3>
-                        Unit 1 Notes
-                    </h3>
-
-                    <p>
-                        Data Structures - Introduction,
-                        Algorithms and Complexity Analysis.
-                    </p>
-
-                    <button
-                        onclick="window.open('https://res.cloudinary.com/w7md19yv/image/upload/v1788276491/dsmp_synopsis.pdf', '_blank')">
-
-                        Open PDF
-
-                    </button>
-
-                </div>
+    </a>
 
 
-            </div>
+    <!-- TOPIC DETAILS -->
 
-        </section>
+    <section class="topic-header">
 
-
-        <!-- PDF VIEWER -->
-
-        <section class="academic-section">
-
-            <h2>
-                PDF Preview
-            </h2>
-
-            <div
-                style="
-                    background:#ffffff;
-                    border:1px solid #d6e2ef;
-                    border-radius:10px;
-                    padding:15px;
-                    box-shadow:0 8px 25px rgba(52,82,120,0.09);
-                "
-            >
-
-                <iframe
-                    src="https://res.cloudinary.com/w7md19yv/image/upload/v1788276491/dsmp_synopsis.pdf"
-                    width="100%"
-                    height="600"
-                    style="border:none; border-radius:6px;"
-                >
-                </iframe>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <footer>
+        <h2 id="topicTitle">
+            Topic
+        </h2>
 
         <p>
-            © 2026 CSE IntelliLearn
+            Select what you want to study.
         </p>
 
-    </footer>
+        <div class="info-box">
+
+            <div class="info-item" id="semesterInfo">
+                Semester
+            </div>
+
+            <div class="info-item" id="unitInfo">
+                Unit
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TOPIC NOTES -->
+
+    <div
+        class="option-card"
+        onclick="openNotes()">
+
+        <div class="option-icon">
+            📚
+        </div>
+
+        <div class="option-content">
+
+            <h3>
+                Topic Notes
+            </h3>
+
+            <p>
+                Read and study notes for this topic.
+            </p>
+
+        </div>
+
+        <div class="option-arrow">
+            →
+        </div>
+
+    </div>
+
+
+    <!-- PYQ -->
+
+    <div
+        class="option-card"
+        onclick="openPYQ()">
+
+        <div class="option-icon">
+            📄
+        </div>
+
+        <div class="option-content">
+
+            <h3>
+                Previous Year Questions
+            </h3>
+
+            <p>
+                Practice previous year questions related to this subject.
+            </p>
+
+        </div>
+
+        <div class="option-arrow">
+            →
+        </div>
+
+    </div>
+
+
+    <!-- ASSIGNMENTS -->
+
+    <div
+        class="option-card"
+        onclick="openAssignments()">
+
+        <div class="option-icon">
+            📝
+        </div>
+
+        <div class="option-content">
+
+            <h3>
+                Assignments
+            </h3>
+
+            <p>
+                View assignments related to this topic.
+            </p>
+
+        </div>
+
+        <div class="option-arrow">
+            →
+        </div>
+
+    </div>
+
+
+    <div id="message"></div>
+
+
+</main>
+
+
+<footer>
+
+    © 2026 CSE IntelliLearn
+
+    <br>
+
+    Learn • Practice • Grow
+
+</footer>
+
+
+<script>
+
+
+/* GET DATA FROM URL */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const subject =
+    params.get("subject");
+
+
+const semester =
+    params.get("semester");
+
+
+const unit =
+    params.get("unit");
+
+
+const topic =
+    params.get("topic");
+
+
+/* HTML ELEMENTS */
+
+const topicTitle =
+    document.getElementById(
+        "topicTitle"
+    );
+
+
+const semesterInfo =
+    document.getElementById(
+        "semesterInfo"
+    );
+
+
+const unitInfo =
+    document.getElementById(
+        "unitInfo"
+    );
+
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+/* SAVE SELECTED DATA */
+
+if (subject) {
+
+    localStorage.setItem(
+        "selectedSubject",
+        subject
+    );
+
+}
+
+if (semester) {
+
+    localStorage.setItem(
+        "selectedSemester",
+        semester
+    );
+
+}
+
+if (unit) {
+
+    localStorage.setItem(
+        "selectedUnit",
+        unit
+    );
+
+}
+
+if (topic) {
+
+    localStorage.setItem(
+        "selectedTopic",
+        topic
+    );
+
+}
+
+
+/* DISPLAY DATA */
+
+if (subject && unit && topic) {
+
+    topicTitle.innerText =
+        topic;
+
+    semesterInfo.innerText =
+        "Semester " + semester;
+
+    unitInfo.innerText =
+        "Unit " + unit;
+
+}
+
+
+/* INVALID DATA */
+
+else {
+
+    message.innerText =
+        "No topic selected.";
+
+}
+
+
+/* OPEN TOPIC NOTES */
+
+function openNotes() {
+
+    window.location.href =
+        "pdf-viewer.html" +
+        "?subject=" +
+        encodeURIComponent(subject) +
+        "&semester=" +
+        encodeURIComponent(semester) +
+        "&unit=" +
+        encodeURIComponent(unit) +
+        "&topic=" +
+        encodeURIComponent(topic);
+
+}
+
+
+/* OPEN PYQ */
+
+function openPYQ() {
+
+    window.location.href =
+        "pyq.html" +
+        "?subject=" +
+        encodeURIComponent(subject) +
+        "&semester=" +
+        encodeURIComponent(semester);
+
+}
+
+
+/* OPEN ASSIGNMENTS */
+
+function openAssignments() {
+
+    window.location.href =
+        "assignments.html" +
+        "?subject=" +
+        encodeURIComponent(subject) +
+        "&semester=" +
+        encodeURIComponent(semester) +
+        "&unit=" +
+        encodeURIComponent(unit) +
+        "&topic=" +
+        encodeURIComponent(topic);
+
+}
+
+
+</script>
+
 
 </body>
 
