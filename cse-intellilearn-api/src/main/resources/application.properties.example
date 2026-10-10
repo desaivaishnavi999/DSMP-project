@@ -2,11 +2,11 @@ spring.application.name=cse-intellilearn-api
 server.port=8080
 
 # ==========================================
-# MySQL Database Configuration (from server.js)
+# MySQL Database Configuration
 # ==========================================
 spring.datasource.url=jdbc:mysql://localhost:3306/myProject?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
 spring.datasource.username=root
-spring.datasource.password=vishu7
+spring.datasource.password=YOUR_MYSQL_PASSWORD_HERE
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 # JPA / Hibernate Settings for MySQL
@@ -16,7 +16,7 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 
 # JWT Configuration
-app.jwt.secret=CSEIntelliLearnSecretKeyForJWTAuthentication2026SecureKeyWithMin256BitsLength!
+app.jwt.secret=YOUR_SUPER_SECRET_JWT_KEY_WITH_MINIMUM_256_BITS_LENGTH
 app.jwt.expiration-ms=86400000
 
 # Cloudinary Configuration
