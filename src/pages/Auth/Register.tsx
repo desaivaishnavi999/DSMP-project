@@ -166,7 +166,7 @@ export default function Register() {
           {/* Identifier (Roll No / Employee ID) */}
           <div>
             <label className="block text-[14px] font-bold text-secondary mb-2">
-              {role === "student" ? "Roll Number / USN" : "Employee / Faculty ID"}
+              {role === "student" ? "Roll Number / PRN" : "Employee / Faculty ID"}
             </label>
             <div className="relative">
               <Building className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
