@@ -31,6 +31,7 @@ export default function Register() {
       role: backendRole,
       year: role === "student" ? Number(year) : null,
       semester: role === "student" ? Number(semester) : null,
+      identifier,
     });
   };
 

@@ -2,32 +2,61 @@ import React, { useState } from "react";
 import { Upload, FileText, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { useAuthStore } from "@/store/useAuthStore";
+import { useYears, useSemesters, useSubjects, useUnits, useTopics, useAddMaterial, useCloudinaryUpload } from "@/hooks";
 
 export default function UploadNotesPage() {
   const user = useAuthStore((s) => s.user);
-  const userName = user?.name ?? "Teacher";
 
   const [title, setTitle] = useState("");
-  const [semester, setSemester] = useState("Semester 3");
-  const [subject, setSubject] = useState("Data Structures");
-  const [unit, setUnit] = useState("Unit 1");
+  const [yearId, setYearId] = useState("");
+  const [semesterId, setSemesterId] = useState("");
+  const [subjectId, setSubjectId] = useState("");
+  const [unitId, setUnitId] = useState("");
+  const [topicId, setTopicId] = useState("");
   const [file, setFile] = useState<File | null>(null);
 
-  const handleUpload = (e: React.FormEvent) => {
+  const { data: years = [] } = useYears();
+  const { data: semesters = [] } = useSemesters(yearId);
+  const { data: subjects = [] } = useSubjects(semesterId);
+  const { data: units = [] } = useUnits(subjectId);
+  const { data: topics = [] } = useTopics(unitId);
+
+  const { uploadFile, isUploading } = useCloudinaryUpload();
+
+  const { mutate: addMaterial, isPending } = useAddMaterial();
+
+  const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !file) {
-      toast.error("Please fill in the title and select a file to upload.");
+    if (!title || !file || !topicId) {
+      toast.error("Please fill in all details, select a topic, and select a file.");
       return;
     }
 
-    toast.success(`Successfully uploaded "${title}" for ${subject} (${unit})!`);
-    setTitle("");
-    setFile(null);
+    const uploadResult = await uploadFile(file);
+    if (!uploadResult) {
+      return; // Error already handled in hook
+    }
+
+    addMaterial(
+      {
+        topicId: Number(topicId),
+        title,
+        description: `Material for Topic ${topicId}`,
+        fileName: uploadResult.fileName,
+        fileUrl: uploadResult.fileUrl,
+        uploadedBy: user?.id ?? 1,
+      },
+      {
+        onSuccess: () => {
+          setTitle("");
+          setFile(null);
+        },
+      }
+    );
   };
 
   return (
     <div className="min-h-screen bg-surface text-secondary font-sans flex flex-col">
-      
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white p-[30px] rounded-[18px] shadow-[0_5px_20px_rgba(30,64,175,0.08)] mb-[30px] border-l-[5px] border-primary">
           <h1 className="text-[30px] font-bold text-secondary m-0 flex items-center gap-3">
@@ -55,55 +84,68 @@ export default function UploadNotesPage() {
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
-                <label className="block text-[14px] font-bold text-secondary mb-2">
-                  Semester
-                </label>
+                <label className="block text-[14px] font-bold text-secondary mb-2">Year</label>
                 <select
-                  value={semester}
-                  onChange={(e) => setSemester(e.target.value)}
+                  value={yearId}
+                  onChange={(e) => { setYearId(e.target.value); setSemesterId(""); setSubjectId(""); setUnitId(""); setTopicId(""); }}
                   className="w-full px-4 py-3 bg-white border border-[#cbd5e1] rounded-xl text-secondary text-[15px] focus:outline-none focus:border-primary"
                 >
-                  <option value="Semester 1">Semester 1</option>
-                  <option value="Semester 2">Semester 2</option>
-                  <option value="Semester 3">Semester 3</option>
-                  <option value="Semester 4">Semester 4</option>
-                  <option value="Semester 5">Semester 5</option>
-                  <option value="Semester 6">Semester 6</option>
-                  <option value="Semester 7">Semester 7</option>
-                  <option value="Semester 8">Semester 8</option>
+                  <option value="">Select Year</option>
+                  {years.map((y: any) => <option key={y.yearId} value={y.yearId}>{y.name}</option>)}
                 </select>
               </div>
 
               <div>
-                <label className="block text-[14px] font-bold text-secondary mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
-                  placeholder="Subject name"
-                  className="w-full px-4 py-3 bg-white border border-[#cbd5e1] rounded-xl text-secondary text-[15px] focus:outline-none focus:border-primary"
-                />
+                <label className="block text-[14px] font-bold text-secondary mb-2">Semester</label>
+                <select
+                  value={semesterId}
+                  onChange={(e) => { setSemesterId(e.target.value); setSubjectId(""); setUnitId(""); setTopicId(""); }}
+                  disabled={!yearId}
+                  className="w-full px-4 py-3 bg-white border border-[#cbd5e1] rounded-xl text-secondary text-[15px] focus:outline-none focus:border-primary disabled:opacity-50"
+                >
+                  <option value="">Select Semester</option>
+                  {semesters.map((s: any) => <option key={s.semesterId} value={s.semesterId}>Semester {s.semesterNumber}</option>)}
+                </select>
               </div>
 
               <div>
-                <label className="block text-[14px] font-bold text-secondary mb-2">
-                  Unit
-                </label>
+                <label className="block text-[14px] font-bold text-secondary mb-2">Subject</label>
                 <select
-                  value={unit}
-                  onChange={(e) => setUnit(e.target.value)}
-                  className="w-full px-4 py-3 bg-white border border-[#cbd5e1] rounded-xl text-secondary text-[15px] focus:outline-none focus:border-primary"
+                  value={subjectId}
+                  onChange={(e) => { setSubjectId(e.target.value); setUnitId(""); setTopicId(""); }}
+                  disabled={!semesterId}
+                  className="w-full px-4 py-3 bg-white border border-[#cbd5e1] rounded-xl text-secondary text-[15px] focus:outline-none focus:border-primary disabled:opacity-50"
                 >
-                  <option value="Unit 1">Unit 1</option>
-                  <option value="Unit 2">Unit 2</option>
-                  <option value="Unit 3">Unit 3</option>
-                  <option value="Unit 4">Unit 4</option>
-                  <option value="Unit 5">Unit 5</option>
-                  <option value="All Units">All Units (PYQ)</option>
+                  <option value="">Select Subject</option>
+                  {subjects.map((sub: any) => <option key={sub.subjectId} value={sub.subjectId}>{sub.name}</option>)}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[14px] font-bold text-secondary mb-2">Unit</label>
+                <select
+                  value={unitId}
+                  onChange={(e) => { setUnitId(e.target.value); setTopicId(""); }}
+                  disabled={!subjectId}
+                  className="w-full px-4 py-3 bg-white border border-[#cbd5e1] rounded-xl text-secondary text-[15px] focus:outline-none focus:border-primary disabled:opacity-50"
+                >
+                  <option value="">Select Unit</option>
+                  {units.map((u: any) => <option key={u.unitId} value={u.unitId}>{u.title}</option>)}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[14px] font-bold text-secondary mb-2">Topic</label>
+                <select
+                  value={topicId}
+                  onChange={(e) => setTopicId(e.target.value)}
+                  disabled={!unitId}
+                  className="w-full px-4 py-3 bg-white border border-[#cbd5e1] rounded-xl text-secondary text-[15px] focus:outline-none focus:border-primary disabled:opacity-50"
+                >
+                  <option value="">Select Topic</option>
+                  {topics.map((t: any) => <option key={t.topicId} value={t.topicId}>{t.title}</option>)}
                 </select>
               </div>
             </div>
@@ -129,9 +171,10 @@ export default function UploadNotesPage() {
 
             <button
               type="submit"
-              className="w-full py-4 bg-primary hover:bg-blue-700 text-white font-bold rounded-xl shadow-[0_4px_10px_rgba(37,99,235,0.2)] text-[15px] transition-all cursor-pointer border-none"
+              disabled={isPending || isUploading}
+              className="w-full py-4 bg-primary hover:bg-blue-700 text-white font-bold rounded-xl shadow-[0_4px_10px_rgba(37,99,235,0.2)] text-[15px] transition-all cursor-pointer border-none disabled:opacity-50"
             >
-              Upload Material
+              {(isPending || isUploading) ? "Uploading Material..." : "Upload Material"}
             </button>
           </form>
         </div>

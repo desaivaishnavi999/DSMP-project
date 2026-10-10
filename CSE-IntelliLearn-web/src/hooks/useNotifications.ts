@@ -1,61 +1,53 @@
-import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { api } from "@/config/api";
+import { API_URLS } from "@/constants/url";
+import { useAuthStore } from "@/store/useAuthStore";
 import type { NotificationItem } from "@/types";
 
-const DEFAULT_NOTIFICATIONS: NotificationItem[] = [
-  {
-    id: "1",
-    title: "New Assignment Posted",
-    message: "A new assignment has been posted for Data Structure Using C.",
-    time: "Today, 10:30 AM",
-    icon: "📝",
-    status: "New",
-    unread: true,
-  },
-  {
-    id: "2",
-    title: "Assignment Checked",
-    message: "Your Computer Network Assignment has been checked by the teacher.",
-    time: "Yesterday, 4:15 PM",
-    icon: "✅",
-    status: "Checked",
-    unread: true,
-  },
-  {
-    id: "3",
-    title: "New Study Material",
-    message: "New notes have been uploaded for Operating System – Unit 1.",
-    time: "2 days ago",
-    icon: "📚",
-    unread: false,
-  },
-  {
-    id: "4",
-    title: "Doubt Answered",
-    message: "Your teacher has answered your doubt related to Data Structures.",
-    time: "3 days ago",
-    icon: "💬",
-    unread: false,
-  },
-  {
-    id: "5",
-    title: "Assignment Deadline Reminder",
-    message: "Your Data Structure Assignment is due on 05 October 2026.",
-    time: "3 days ago",
-    icon: "⏰",
-    unread: false,
-  },
-];
+const getIconForType = (type: string) => {
+  if (type === "ASSIGNMENT") return "📝";
+  if (type === "FEEDBACK") return "✅";
+  if (type === "MATERIAL") return "📚";
+  if (type === "DOUBT") return "💬";
+  return "🔔";
+};
 
-export const useNotifications = (initialData = DEFAULT_NOTIFICATIONS) => {
-  const [notifications, setNotifications] = useState<NotificationItem[]>(initialData);
+export const useNotifications = () => {
+  const user = useAuthStore((s) => s.user);
+  const queryClient = useQueryClient();
+
+  const { data: notifications = [] } = useQuery({
+    queryKey: ["notifications", user?.id],
+    queryFn: async () => {
+      if (!user?.id) return [];
+      const res = await api.get(API_URLS.NOTIFICATIONS.BY_USER(user.id));
+      return res.data.map((n: any): NotificationItem => ({
+        id: n.notificationId.toString(),
+        title: n.title,
+        message: n.message,
+        time: new Date(n.createdAt).toLocaleString(),
+        icon: getIconForType(n.notificationType),
+        status: n.isRead ? undefined : "New",
+        unread: !n.isRead,
+      }));
+    },
+    enabled: !!user?.id,
+  });
+
+  const { mutate: markReadMutation } = useMutation({
+    mutationFn: async (id: string | number) => {
+      await api.put(API_URLS.NOTIFICATIONS.MARK_READ(id));
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notifications", user?.id] });
+    },
+  });
 
   const markRead = (id: string) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, unread: false } : n)),
-    );
+    markReadMutation(id);
   };
 
-  const unreadCount = notifications.filter((n) => n.unread).length;
+  const unreadCount = notifications.filter((n: NotificationItem) => n.unread).length;
 
   return { notifications, markRead, unreadCount };
 };

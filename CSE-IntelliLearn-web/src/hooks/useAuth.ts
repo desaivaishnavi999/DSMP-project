@@ -13,6 +13,7 @@ export interface RegisterPayload {
   role: "ROLE_STUDENT" | "ROLE_TEACHER" | "ROLE_ADMIN";
   year?: number | null;
   semester?: number | null;
+  identifier?: string;
 }
 
 export interface LoginPayload {

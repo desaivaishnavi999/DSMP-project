@@ -10,7 +10,6 @@ import { useLogin } from "@/hooks";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("student");
 
   const { mutate: login, isPending } = useLogin();
 
@@ -102,23 +101,6 @@ export default function Login() {
               />
             </div>
 
-            <div>
-              <label className="block mb-[8px] text-[14px] font-bold text-[#1e293b]">
-                Login As
-              </label>
-              <select
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                required
-                className="w-full p-[14px_15px] border border-[#cbd5e1] rounded-[10px] text-[15px] text-[#172554] outline-none bg-[#f8fafc] transition-all focus:border-[#2563eb] focus:bg-white focus:shadow-[0_0_0_3px_rgba(37,99,235,0.10)]"
-              >
-                <option value="" disabled>Select Role</option>
-                <option value="student">Student</option>
-                <option value="teacher">Teacher</option>
-                <option value="admin">Admin</option>
-              </select>
-            </div>
-
             <button
               type="submit"
               disabled={isPending}
@@ -135,7 +117,14 @@ export default function Login() {
             </button>
           </form>
 
-          <div className="mt-[25px] text-center text-[#94a3b8] text-[13px]">
+          <div className="mt-[20px] text-center text-[#64748b] text-[14px]">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-[#2563eb] font-bold no-underline hover:underline">
+              Create Account
+            </Link>
+          </div>
+
+          <div className="mt-[20px] text-center text-[#94a3b8] text-[13px]">
             © 2026 CSE IntelliLearn<br />Learn • Practice • Grow
           </div>
         </div>

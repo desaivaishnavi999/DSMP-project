@@ -11,6 +11,7 @@ public class UserResponse {
     private Role role;
     private Integer year;
     private Integer semester;
+    private String identifier;
 
     public UserResponse() {
     }
@@ -22,6 +23,7 @@ public class UserResponse {
         this.role = user.getRole();
         this.year = user.getYear();
         this.semester = user.getSemester();
+        this.identifier = user.getRollNo();
     }
 
     public Long getId() {
@@ -70,5 +72,13 @@ public class UserResponse {
 
     public void setSemester(Integer semester) {
         this.semester = semester;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 }

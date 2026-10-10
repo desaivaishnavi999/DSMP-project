@@ -9,6 +9,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     @Column(nullable = false)
@@ -20,12 +21,19 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "roll_no")
+    private String rollNo;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
-    private Integer year;     // 1, 2, 3, 4 for Students
-    private Integer semester; // 1 to 8 for Students
+    private String department;
+
+    @Column(name = "year_id")
+    private Integer year;     // 1, 2, 3, 4
+
+    private Integer semester; // 1 to 8
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -33,12 +41,14 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String email, String password, Role role, Integer year, Integer semester, LocalDateTime createdAt) {
+    public User(Long id, String name, String email, String password, String rollNo, Role role, String department, Integer year, Integer semester, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.rollNo = rollNo;
         this.role = role;
+        this.department = department;
         this.year = year;
         this.semester = semester;
         this.createdAt = createdAt;
@@ -46,7 +56,9 @@ public class User {
 
     @PrePersist
     protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
     }
 
     // Getters and Setters
@@ -82,12 +94,28 @@ public class User {
         this.password = password;
     }
 
+    public String getRollNo() {
+        return rollNo;
+    }
+
+    public void setRollNo(String rollNo) {
+        this.rollNo = rollNo;
+    }
+
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public Integer getYear() {

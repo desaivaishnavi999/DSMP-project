@@ -24,6 +24,7 @@ public class RegisterRequest {
 
     private Integer year;
     private Integer semester;
+    private String identifier;
 
     public RegisterRequest() {
     }
@@ -74,5 +75,13 @@ public class RegisterRequest {
 
     public void setSemester(Integer semester) {
         this.semester = semester;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 }

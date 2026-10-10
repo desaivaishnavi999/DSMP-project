@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
 import { FilePlus } from "lucide-react";
 import { toast } from "sonner";
+import { useCreateAssignment } from "@/hooks";
 
 export default function CreateAssignmentPage() {
   const user = useAuthStore((state) => state.user);
-  const userName = user?.name || "Prof. Sharma";
 
   const [title, setTitle] = useState("");
-  const [subject, setSubject] = useState("Data Structures");
+  const [subject, setSubject] = useState("1"); // subjectId
   const [dueDate, setDueDate] = useState("");
   const [description, setDescription] = useState("");
+
+  const { mutate: createAssignment, isPending } = useCreateAssignment();
 
   const handleCreateAssignment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,15 +21,28 @@ export default function CreateAssignmentPage() {
       return;
     }
 
-    toast.success(`Assignment "${title}" published for students!`);
-    setTitle("");
-    setDueDate("");
-    setDescription("");
+    const isoDueDate = new Date(dueDate).toISOString();
+
+    createAssignment(
+      {
+        title,
+        description,
+        subjectId: Number(subject) || 1,
+        teacherId: user?.id ?? 1,
+        dueDate: isoDueDate,
+      },
+      {
+        onSuccess: () => {
+          setTitle("");
+          setDueDate("");
+          setDescription("");
+        },
+      }
+    );
   };
 
   return (
     <div className="min-h-screen bg-surface text-secondary font-sans flex flex-col">
-      
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white p-[30px] rounded-[18px] shadow-[0_5px_20px_rgba(30,64,175,0.08)] mb-[30px] border-l-[5px] border-primary">
           <h1 className="text-[30px] font-bold text-secondary m-0 flex items-center gap-3">
@@ -65,10 +80,10 @@ export default function CreateAssignmentPage() {
                   onChange={(e) => setSubject(e.target.value)}
                   className="w-full px-4 py-3 bg-white border border-[#cbd5e1] rounded-xl text-secondary text-[15px] focus:outline-none focus:border-primary"
                 >
-                  <option value="Data Structures">Data Structures & Algorithms</option>
-                  <option value="DBMS">Database Management Systems</option>
-                  <option value="Operating Systems">Operating Systems</option>
-                  <option value="Computer Networks">Computer Networks</option>
+                  <option value="1">Data Structures & Algorithms</option>
+                  <option value="2">Database Management Systems</option>
+                  <option value="3">Operating Systems</option>
+                  <option value="4">Computer Networks</option>
                 </select>
               </div>
 
@@ -102,9 +117,10 @@ export default function CreateAssignmentPage() {
 
             <button
               type="submit"
-              className="w-full py-4 bg-primary hover:bg-blue-700 text-white font-bold rounded-xl shadow-[0_4px_10px_rgba(37,99,235,0.2)] text-[15px] transition-all cursor-pointer border-none"
+              disabled={isPending}
+              className="w-full py-4 bg-primary hover:bg-blue-700 text-white font-bold rounded-xl shadow-[0_4px_10px_rgba(37,99,235,0.2)] text-[15px] transition-all cursor-pointer border-none disabled:opacity-50"
             >
-              Publish Assignment
+              {isPending ? "Publishing Assignment..." : "Publish Assignment"}
             </button>
           </form>
         </div>

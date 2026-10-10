@@ -48,7 +48,7 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)) // Allows H2 console
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/v1/auth/**", "/h2-console/**").permitAll()
+                .requestMatchers("/api/v1/**", "/h2-console/**").permitAll()
                 .anyRequest().authenticated()
             );
 

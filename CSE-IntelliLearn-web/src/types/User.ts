@@ -7,4 +7,5 @@ export interface User {
   semester?: number;
   department?: string;
   avatarUrl?: string;
+  identifier?: string;
 }

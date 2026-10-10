@@ -1,46 +1,45 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import type { Assignment } from "@/types";
-import { ROUTES } from "@/constants";
 import { useAuthStore } from "@/store/useAuthStore";
-import { ClipboardList } from "lucide-react";
+import { ClipboardList, CheckCircle2 } from "lucide-react";
+import { useAssignments, useSubmitAssignment, useCloudinaryUpload } from "@/hooks";
+import { toast } from "sonner";
 
 export default function AssignmentsPage() {
-  const navigate = useNavigate();
   const { user } = useAuthStore();
+  const { data: assignments = [], isLoading } = useAssignments();
+  const { mutate: submitWork, isPending } = useSubmitAssignment();
 
-  const [assignments] = useState<Assignment[]>([
-    {
-      id: "1",
-      title: "Assignment 1: Implementation of Red-Black Trees",
-      subject: "Data Structures",
-      dueDate: "2026-10-15",
-      status: "Pending",
-      description: "Implement insertion and deletion operations in a Red-Black tree in C++/Java.",
-    },
-    {
-      id: "2",
-      title: "Assignment 2: SQL Query Optimization & Joins",
-      subject: "DBMS",
-      dueDate: "2026-10-10",
-      status: "Submitted",
-      description: "Submit PDF report analyzing execution plans for complex SQL joins.",
-    },
-    {
-      id: "3",
-      title: "Assignment 3: Process Scheduler Simulation",
-      subject: "Operating Systems",
-      dueDate: "2026-09-28",
-      status: "Graded",
-      description: "Simulate Round Robin and Round Robin with Feedback queue scheduling.",
-      grade: "A (95/100)",
-    },
-  ]);
+  const [activeAssignmentId, setActiveAssignmentId] = useState<number | string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const { uploadFile, isUploading } = useCloudinaryUpload();
+
+  const handleSubmitWork = async (assignmentId: number | string) => {
+    if (!file) {
+      toast.error("Please select a file to submit.");
+      return;
+    }
+
+    const uploadResult = await uploadFile(file);
+    if (!uploadResult) return;
+
+    submitWork(
+      {
+        assignmentId,
+        studentId: user?.id ?? 1,
+        fileName: uploadResult.fileName,
+        fileUrl: uploadResult.fileUrl,
+      },
+      {
+        onSuccess: () => {
+          setActiveAssignmentId(null);
+          setFile(null);
+        },
+      }
+    );
+  };
 
   return (
     <div className="min-h-screen bg-surface text-secondary font-sans">
-      
-      {/* MAIN */}
       <main className="max-w-[1200px] mx-auto mt-[35px] px-5 pb-10">
         <div className="bg-white p-[30px] rounded-[18px] shadow-[0_5px_20px_rgba(30,64,175,0.08)] mb-[30px] border-l-[5px] border-primary">
           <h1 className="m-0 text-secondary text-[25px] sm:text-[30px] font-bold flex items-center gap-3">
@@ -52,62 +51,71 @@ export default function AssignmentsPage() {
           </p>
         </div>
 
-        <div className="flex flex-col gap-[20px]">
-          {assignments.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white p-[25px] rounded-[18px] shadow-[0_5px_20px_rgba(30,64,175,0.08)] border border-[#e1eaf8] flex flex-col md:flex-row justify-between items-start md:items-center gap-5 transition-all duration-250 hover:shadow-[0_10px_28px_rgba(30,64,175,0.15)] hover:border-[#93c5fd]"
-            >
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className="px-3 py-1 bg-[#eaf2ff] text-[#2563eb] text-[13px] font-bold rounded-md">
-                    {item.subject}
-                  </span>
-                  {item.status === "Pending" && (
+        {isLoading ? (
+          <div className="p-8 text-center text-slate-500 font-bold bg-white rounded-2xl border">Loading assignments...</div>
+        ) : assignments.length === 0 ? (
+          <div className="p-12 text-center text-slate-500 bg-white rounded-2xl border">
+            No active assignments found.
+          </div>
+        ) : (
+          <div className="flex flex-col gap-[20px]">
+            {assignments.map((item: any) => (
+              <div
+                key={item.assignmentId}
+                className="bg-white p-[25px] rounded-[18px] shadow-[0_5px_20px_rgba(30,64,175,0.08)] border border-[#e1eaf8] flex flex-col justify-between items-start gap-5 transition-all duration-250 hover:shadow-[0_10px_28px_rgba(30,64,175,0.15)]"
+              >
+                <div className="w-full">
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
                     <span className="px-3 py-1 bg-[#fff3cd] text-[#856404] text-[13px] font-bold rounded-md border border-[#ffeeba]">
-                      Due: {item.dueDate}
+                      Due: {item.dueDate ? new Date(item.dueDate).toLocaleDateString() : "No Due Date"}
                     </span>
-                  )}
-                  {item.status === "Submitted" && (
-                    <span className="px-3 py-1 bg-[#d4edda] text-[#155724] text-[13px] font-bold rounded-md border border-[#c3e6cb]">
-                      Submitted
-                    </span>
-                  )}
-                  {item.status === "Graded" && (
-                    <span className="px-3 py-1 bg-[#d1ecf1] text-[#0c5460] text-[13px] font-bold rounded-md border border-[#bee5eb]">
-                      Graded: {item.grade}
-                    </span>
-                  )}
+                  </div>
+                  <h3 className="m-0 text-[#12305b] text-[19px] font-bold mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="m-0 text-[#64748b] text-[15px] leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="m-0 text-[#12305b] text-[19px] font-bold mb-2">
-                  {item.title}
-                </h3>
-                <p className="m-0 text-[#64748b] text-[15px] leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
 
-              <div className="shrink-0 w-full md:w-auto">
-                {item.status === "Pending" ? (
-                  <button className="w-full md:w-auto px-6 py-2.5 bg-[#2563eb] text-white text-[15px] font-bold rounded-[8px] border-none cursor-pointer hover:bg-[#1d4ed8] transition-colors shadow-[0_4px_10px_rgba(37,99,235,0.2)] hover:-translate-y-[2px]">
-                    Submit Work
-                  </button>
+                {activeAssignmentId === item.assignmentId ? (
+                  <div className="w-full space-y-3 mt-2 pt-3 border-t">
+                    <input
+                      type="file"
+                      onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
+                      className="w-full px-4 py-2.5 border rounded-xl text-secondary text-[14px] focus:outline-none focus:border-primary file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-[14px] file:font-bold file:bg-primary-light file:text-primary hover:file:bg-[#dbeafe] cursor-pointer"
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleSubmitWork(item.assignmentId)}
+                        disabled={isPending || isUploading}
+                        className="px-5 py-2 bg-primary hover:bg-blue-700 text-white font-bold text-[14px] rounded-xl cursor-pointer border-none shadow-[0_4px_10px_rgba(37,99,235,0.2)] disabled:opacity-50"
+                      >
+                        {(isPending || isUploading) ? "Submitting..." : "Confirm & Submit"}
+                      </button>
+                      <button
+                        onClick={() => setActiveAssignmentId(null)}
+                        className="px-5 py-2 bg-slate-100 text-slate-600 font-bold text-[14px] rounded-xl cursor-pointer border-none"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
                 ) : (
-                  <button
-                    disabled
-                    className="w-full md:w-auto px-6 py-2.5 bg-[#f1f5f9] text-[#94a3b8] text-[15px] font-bold rounded-[8px] border border-[#e2e8f0] cursor-not-allowed"
-                  >
-                    Completed
-                  </button>
+                  <div className="shrink-0 w-full md:w-auto">
+                    <button
+                      onClick={() => setActiveAssignmentId(item.assignmentId)}
+                      className="w-full md:w-auto px-6 py-2.5 bg-[#2563eb] text-white text-[15px] font-bold rounded-[8px] border-none cursor-pointer hover:bg-[#1d4ed8] transition-colors shadow-[0_4px_10px_rgba(37,99,235,0.2)]"
+                    >
+                      Submit Work
+                    </button>
+                  </div>
                 )}
               </div>
-            </div>
-          ))}
-        </div>
-
-
-      </main>
-
+            ))}
           </div>
+        )}
+      </main>
+    </div>
   );
 }

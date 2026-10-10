@@ -44,6 +44,7 @@ public class AuthService {
         user.setRole(registerRequest.getRole());
         user.setYear(registerRequest.getYear());
         user.setSemester(registerRequest.getSemester());
+        user.setRollNo(registerRequest.getIdentifier());
 
         User savedUser = userRepository.save(user);
 
