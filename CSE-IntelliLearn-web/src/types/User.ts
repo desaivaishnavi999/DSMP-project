@@ -1,9 +1,10 @@
 export interface User {
-  id: string;
+  id: number | string;
   name: string;
   email: string;
-  role: "student" | "teacher" | "admin";
+  role: "ROLE_STUDENT" | "ROLE_TEACHER" | "ROLE_ADMIN" | "student" | "teacher" | "admin";
+  year?: number;
+  semester?: number;
   department?: string;
-  identifier?: string;
   avatarUrl?: string;
 }

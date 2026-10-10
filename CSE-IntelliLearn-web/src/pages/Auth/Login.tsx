@@ -5,44 +5,23 @@ import { toast } from "sonner";
 import { ROUTES } from "@/constants";
 import { GraduationCap, BookOpen, FileText, ClipboardList, Lightbulb, Hand } from "lucide-react";
 
-export default function Login() {
-  const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);
+import { useLogin } from "@/hooks";
 
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("student");
-  const [isLoading, setIsLoading] = useState(false);
+
+  const { mutate: login, isPending } = useLogin();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password || !role) {
+    if (!email || !password) {
       toast.error("Please fill in all fields.");
       return;
     }
 
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      const user = {
-        id: "usr_101",
-        name: email.split("@")[0] || "User",
-        email,
-        role: role as "student" | "teacher" | "admin",
-        department: "Computer Science & Engineering",
-      };
-      
-      login(user, "mock_jwt_token_12345");
-      toast.success(`Welcome back, ${user.name}!`);
-
-      if (role === "student") {
-        navigate(ROUTES.STUDENT.DASHBOARD);
-      } else if (role === "teacher") {
-        navigate(ROUTES.TEACHER.DASHBOARD);
-      } else {
-        toast.info("Admin portal feature coming soon!");
-      }
-    }, 800);
+    login({ email, password });
   };
 
   return (
@@ -142,10 +121,10 @@ export default function Login() {
 
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isPending}
               className="w-full p-[14px] mt-[5px] border-none rounded-[10px] bg-gradient-to-br from-[#172554] to-[#2563eb] text-white text-[16px] font-bold cursor-pointer transition-all hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(37,99,235,0.25)] flex items-center justify-center gap-2"
             >
-              {isLoading ? (
+              {isPending ? (
                 <>
                   <span className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                   Logging in...
